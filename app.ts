@@ -67,7 +67,7 @@ class ProductDepartment {
 `
 })
 class ProductRow {
-
+	product: Product
 }
 @Component({
 	selector: 'product-list',
@@ -85,7 +85,7 @@ class ProductRow {
 		</div>
 `
 })
-class ProductList {
+class ProductsList {
 	productList: Product[];
 
 	onProductSelected: EventEmitter<Product>;
@@ -102,7 +102,7 @@ class ProductList {
 	}
 
 	isSelected(product: Product): boolean {
-		if (!product || this.currentProduct){
+		if (!product || !this.currentProduct){
 			return false;
 		}
 		return product.sku === this.currentProduct.sku;
@@ -110,7 +110,7 @@ class ProductList {
 }
 @Component({
 	selector: 'inventory-app',
-	directives: [ProductList],
+	directives: [ProductsList],
 	template: `
 	<div class="inventory-app">
 		<product-list
@@ -123,10 +123,10 @@ class ProductList {
 
 })
 class InventoryApp {
-	product: Product[];
+	products: Product[];
 
 	constructor(){
-		this.product = [
+		this.products = [
 			new Product(
 				'MYSHOES', 'Black Running SHoes', '/resources/images/products/black-shoes.jpg', ['Women', 'Apparel', 'Jackets & Vests'], 238.99
 			),
